@@ -1,11 +1,14 @@
 // --- Gestión de feature toggles ---
+export function shouldShowFeature(features, featureName) {
+  return features[featureName] === true;
+}
 
 let features = {}; // se llenará tras el fetch
 
 async function loadFeatureToggles() {
   try {
     const response = await fetch("config/features.json", {
-      cache: "no-store", // ayuda a ver cambios durante desarrollo
+      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -13,7 +16,7 @@ async function loadFeatureToggles() {
         "No se pudieron cargar los feature toggles:",
         response.status,
       );
-      features = {}; // por defecto, todo desactivado
+      features = {};
       return;
     }
 
@@ -21,15 +24,25 @@ async function loadFeatureToggles() {
     console.log("Feature toggles cargados:", features);
   } catch (error) {
     console.error("Error cargando feature toggles:", error);
-    features = {}; // fallback seguro
+    features = {};
   }
 }
 
 function isFeatureEnabled(featureName) {
-  return features[featureName] === true;
+  return shouldShowFeature(features, featureName);
 }
 
 // --- Calculadora básica ---
+export function sumTwoNumbers(a, b) {
+  const numA = Number(a);
+  const numB = Number(b);
+
+  if (Number.isNaN(numA) || Number.isNaN(numB)) {
+    throw new Error("Valores no numéricos");
+  }
+
+  return numA + numB;
+}
 
 function setupCalculator() {
   const inputA = document.getElementById("calc-a");
@@ -38,16 +51,12 @@ function setupCalculator() {
   const result = document.getElementById("calc-result");
 
   btnSum.addEventListener("click", () => {
-    const a = Number(inputA.value);
-    const b = Number(inputB.value);
-
-    if (Number.isNaN(a) || Number.isNaN(b)) {
+    try {
+      const sum = sumTwoNumbers(inputA.value, inputB.value);
+      result.textContent = `Resultado: ${sum}`;
+    } catch (e) {
       result.textContent = "Por favor ingresa números válidos.";
-      return;
     }
-
-    const sum = a + b;
-    result.textContent = `Resultado: ${sum}`;
   });
 }
 
@@ -86,3 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 3. Configuramos la UI del color picker en función de los toggles
   setupColorPicker();
 });
+
+// Para que Jest pueda importar estas funciones
+export default {
+  sumTwoNumbers,
+  shouldShowFeature,
+};
