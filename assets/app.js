@@ -1,10 +1,32 @@
-// Cargar toggles (en un entorno real sería via fetch o build; aquí lo simulamos)
-const features = {
-  color_picker: false, // este valor se sincroniza con features.json manualmente en el ejemplo
-};
+// --- Gestión de feature toggles ---
 
-function isFeatureEnabled(name) {
-  return !!features[name];
+let features = {}; // se llenará tras el fetch
+
+async function loadFeatureToggles() {
+  try {
+    const response = await fetch("config/features.json", {
+      cache: "no-store", // ayuda a ver cambios durante desarrollo
+    });
+
+    if (!response.ok) {
+      console.error(
+        "No se pudieron cargar los feature toggles:",
+        response.status,
+      );
+      features = {}; // por defecto, todo desactivado
+      return;
+    }
+
+    features = await response.json();
+    console.log("Feature toggles cargados:", features);
+  } catch (error) {
+    console.error("Error cargando feature toggles:", error);
+    features = {}; // fallback seguro
+  }
+}
+
+function isFeatureEnabled(featureName) {
+  return features[featureName] === true;
 }
 
 // --- Calculadora básica ---
@@ -18,23 +40,29 @@ function setupCalculator() {
   btnSum.addEventListener("click", () => {
     const a = Number(inputA.value);
     const b = Number(inputB.value);
+
+    if (Number.isNaN(a) || Number.isNaN(b)) {
+      result.textContent = "Por favor ingresa números válidos.";
+      return;
+    }
+
     const sum = a + b;
     result.textContent = `Resultado: ${sum}`;
   });
 }
 
-// --- Color picker (feature toggle) ---
+// --- Color picker (controlado por toggle) ---
 
 function setupColorPicker() {
   const section = document.getElementById("color-picker-section");
 
   if (!isFeatureEnabled("color_picker")) {
-    // Si la funcionalidad está desactivada, ocultamos la sección y no hacemos nada más
+    // Funcionalidad desactivada: ocultamos la sección y salimos
     section.classList.add("hidden");
     return;
   }
 
-  // Si está activada, mostramos la sección y conectamos la lógica
+  // Funcionalidad activada: mostramos la sección y conectamos eventos
   section.classList.remove("hidden");
 
   const input = document.getElementById("color-input");
@@ -46,9 +74,15 @@ function setupColorPicker() {
   });
 }
 
-// --- Inicialización ---
+// --- Inicialización de la app ---
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1. Siempre inicializamos la calculadora
   setupCalculator();
+
+  // 2. Cargamos toggles desde features.json
+  await loadFeatureToggles();
+
+  // 3. Configuramos la UI del color picker en función de los toggles
   setupColorPicker();
 });
