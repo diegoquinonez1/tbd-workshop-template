@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  basic-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Install dependencies
+        run: echo "No dependencies yet"
+
+      - name: Run tests
+        run: echo "No tests yet, but CI is working"
+
+      # linters o tests de JS si existe package.json
+      - name: List project files (placeholder CI step)
+        run: ls -R
+
+        
