@@ -46,3 +46,19 @@ index.html           # Estructura de la página (HTML)
 styles.css           # Estilos básicos (CSS)
 app.js               # Lógica de la calculadora y del color picker (JS)
 config/features.json # Definición de feature toggles
+```
+
+---
+
+## 3. Checklist final de Trunk-Based Development
+
+Todos los días deberíamos poder responder “sí” a:
+
+- [x] ¿main está desplegable y con tests verdes?  
+- [ ] ¿Mis cambios de hoy se integran (o se integraron) a main?  
+- [ ] ¿He evitado ramas que vivan más de 1–2 días?  
+- [ ] ¿He dividido la tarea en pasos pequeños?  
+- [ ] ¿Cualquier funcionalidad incompleta está protegida por un feature toggle?  
+- [ ] ¿No he fusionado nada a main saltándome CI?  
+- [ ] ¿He borrado mis ramas una vez fusionadas?  
+
