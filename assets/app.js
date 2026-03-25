@@ -84,17 +84,19 @@ function setupColorPicker() {
 }
 
 // --- Inicialización de la app ---
+// Solo ejecutamos la inicialización en entornos con DOM disponible
+if (typeof document !== 'undefined') {
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Siempre inicializamos la calculadora
+    setupCalculator();
 
-document.addEventListener("DOMContentLoaded", async () => {
-  // 1. Siempre inicializamos la calculadora
-  setupCalculator();
+    // 2. Cargamos toggles desde features.json
+    await loadFeatureToggles();
 
-  // 2. Cargamos toggles desde features.json
-  await loadFeatureToggles();
-
-  // 3. Configuramos la UI del color picker en función de los toggles
-  setupColorPicker();
-});
+    // 3. Configuramos la UI del color picker en función de los toggles
+    setupColorPicker();
+  });
+}
 
 // Para que Jest pueda importar estas funciones
 export default {
