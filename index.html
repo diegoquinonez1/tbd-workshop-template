@@ -4,11 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trunk-Based Development Workshop</title>
+    <title>Demo TBD - Calculadora y Color Picker</title>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body>
+    <h1>Demo Trunk-Based Development</h1>
 
+    <section id="calculator-section">
+        <h2>Calculadora básica</h2>
+        <input id="calc-a" type="number" placeholder="Número A" />
+        <input id="calc-b" type="number" placeholder="Número B" />
+        <button id="btn-sum">Sumar</button>
+        <div id="calc-result"></div>
+    </section>
+
+    <!-- Esta sección será controlada por un feature toggle -->
+    <section id="color-picker-section" class="hidden">
+        <h2>Color picker (nueva funcionalidad)</h2>
+        <input id="color-input" type="color" />
+        <div id="color-preview">Vista previa</div>
+    </section>
+
+    <script src="assets/app.js" defer></script>
 </body>
 
 </html>
