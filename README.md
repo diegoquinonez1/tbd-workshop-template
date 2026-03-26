@@ -169,7 +169,7 @@ En la configuración del Static Site, activar Auto-Deploy para main.
 
 ---
 
-## 4. Checklist final de Trunk-Based Development
+## 9. Checklist final de Trunk-Based Development
 
 Todos los días deberíamos poder responder “sí” a:
 
