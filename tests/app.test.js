@@ -1,4 +1,4 @@
-import { sumTwoNumbers, shouldShowFeature } from "../assets/app.js";
+import { sumTwoNumbers, shouldShowFeature, setupCalculator } from "../assets/app.js";
 
 describe("sumTwoNumbers", () => {
   test("suma dos números válidos", () => {
