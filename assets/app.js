@@ -44,7 +44,7 @@ export function sumTwoNumbers(a, b) {
   return numA + numB;
 }
 
-function setupCalculator() {
+export function setupCalculator() {
   const inputA = document.getElementById("calc-a");
   const inputB = document.getElementById("calc-b");
   const btnSum = document.getElementById("btn-sum");
@@ -85,7 +85,7 @@ function setupColorPicker() {
 
 // --- Inicialización de la app ---
 // Solo ejecutamos la inicialización en entornos con DOM disponible
-if (typeof document !== 'undefined') {
+if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", async () => {
     // 1. Siempre inicializamos la calculadora
     setupCalculator();
