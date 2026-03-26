@@ -61,6 +61,8 @@ package.json           # Dependencias (Jest, jest-environment-jsdom, etc.)
 ![mini-diagrama](assets/Arquitectura%20y%20diseño.png)
 ### 3.2. Diagrama de flujo de toggles
 ![mini-diagrama](assets/Diagrama%20de%20flujo%20de%20toggles.png)
+### 3.3 Diagrama de componentes
+![mini-diagrama](assets/Diagrama%20de%20componentes.png)
 
 ---
 
@@ -121,7 +123,10 @@ Configurar protección de rama en GitHub para main:
 Esta mini app es puramente estática (HTML, CSS, JS y JSON), así que se puede desplegar fácilmente usando un Static Site en Render:  
 https://tbd-workshop-template.onrender.com/
 
-### 7.1. Crear Static Site en Render
+### 7.1 7.1. Diagrama de despliegue
+![mini-diagrama](assets/Diagrama%20de%20despliegue.png)
+
+### 7.2. Crear Static Site en Render
 1. Crear cuenta en Render (plan gratuito).
 2. Conectar cuenta de GitHub.
 3. En el panel de Render, New + → Static Site.
